@@ -1,244 +1,106 @@
-# 🎮 AI Checkers Game - Warcaby z algorytmami Minimax i Alpha-Beta
+# Checkers with Minimax & Alpha-Beta AI
 
-> Zaawansowana implementacja gry w warcaby (checkers) z wykorzystaniem algorytmów sztucznej inteligencji w silniku Godot Engine 4.1
----
+Checkers game implementation with Minimax and Alpha-Beta pruning algorithms in Godot Engine 4.1. Player vs AI with configurable search depth (4-7 levels).
 
-## 📋 Executive Summary
+## Features
 
-**AI Checkers** to w pełni funkcjonalna gra w warcaby z zaawansowanym systemem sztucznej inteligencji opartym na klasycznych algorytmach teorii gier. Projekt demonstruje głęboką znajomość algorytmów AI, programowania gier oraz architektury oprogramowania.
+- **Two AI algorithms**: Minimax and Alpha-Beta Pruning
+- **Complete checkers rules**: Standard moves, kings, multi-jumps, forced captures
+- **Configurable search depth**: 4-5 levels (can handle up to 7 with Alpha-Beta)
+- **Evaluation function**: Material count, center control, mobility, king proximity
+- **UI**: Menu system, move visualization, sound effects
 
-Gra pozwala na rozgrywkę człowieka przeciwko komputerowi, który wykorzystuje dwa różne algorytmy AI:
-- **Minimax** - klasyczny algorytm przeszukiwania drzewa gry z konfigurowalna głębokością
-- **Alpha-Beta Pruning** - zoptymalizowana wersja Minimax z przycinaniem drzewa decyzyjnego
+## Tech Stack
 
-Projekt zawiera kompletną logikę gry w warcaby, w tym:
-- Ruchy standardowe i damki (kings)
-- System bić wielokrotnych
-- Promocje pionków do damek
-- Detekcję końca gry i warunków zwycięstwa
-- System menu i interfejs użytkownika
+- **Engine**: Godot 4.1
+- **Language**: GDScript
+- **Patterns**: Singleton, Strategy
+- **Architecture**: Modular scene-based design
 
----
-
-## ✨ Key Features
-
-### 🤖 Sztuczna Inteligencja
-- **Dwa algorytmy AI** do wyboru: Minimax i Alpha-Beta Pruning
-- **Konfigurowalna głębokość przeszukiwania** (depth 4-5 widoczne w eksportach)
-- **Zaawansowana funkcja ewaluacji** uwzględniająca:
-  - Liczbę i rodzaj pionków
-  - Kontrolę centrum planszy
-  - Mobilność pionków
-  - Bliskość promocji do damki
-  - Kontrolę krawędzi planszy
-
-### 🎲 Mechanika Gry
-- **Pełne zasady polskich/międzynarodowych warcabów**
-- **System bić obowiązkowych** z detekcją możliwości ataku
-- **Bicia wielokrotne** w jednej turze
-- **Promocja do damki** przy osiągnięciu końca planszy
-- **Ruch damek** we wszystkich kierunkach po przekątnej
-- **Detekcja remisu** (brak bić przez określoną liczbę ruchów)
-
-### 🎨 Interfejs i UX
-- **System menu** z wyborem algorytmu AI
-- **Wizualizacja możliwych ruchów**
-- **Animacje ruchów pionków**
-- **Efekty dźwiękowe** (ruch pionka, bicie, koniec gry)
-- **Interfejs 1000x800px** z planszą 8x8
-
-### 🏗️ Architektura
-- **Modułowa struktura kodu** z separacją logiki
-- **Singleton pattern** dla zmiennych globalnych
-- **Scene-based architecture** w Godot
-- **Klasa GameState** do symulacji stanów gry w algorytmach AI
-
----
-
-## 🛠️ Tech Stack & Skills Demonstrated
-
-### Technologie
-| Kategoria | Technologia |
-|-----------|-------------|
-| **Game Engine** | Godot Engine 4.1 |
-| **Język** | GDScript |
-| **Architektura** | OOP, Scene Tree, Singleton Pattern |
-| **Export** | Standalone `.pck` files |
-
-### Umiejętności programistyczne
-- ✅ **Algorytmy AI** - implementacja Minimax i Alpha-Beta Pruning
-- ✅ **Teoria gier** - funkcje ewaluacji, przeszukiwanie drzewa gry, heurystyki
-- ✅ **Programowanie obiektowe** - klasy, dziedziczenie, enkapsulacja
-- ✅ **Struktury danych** - tablice 2D, słowniki, grafy (drzewo gry)
-- ✅ **Architektura oprogramowania** - modularność, separation of concerns
-- ✅ **Game development** - game loop, state management, event handling
-- ✅ **Debugging i optymalizacja** - zarządzanie wydajnością algorytmów
-
-### Koncepcje teoretyczne
-- **Minimax Algorithm** - rekurencyjne przeszukiwanie drzewa gry
-- **Alpha-Beta Pruning** - optymalizacja przez eliminację nieperspektywicznych gałęzi
-- **Game State Evaluation** - heurystyczna ocena pozycji
-- **Move Generation** - generowanie legalnych ruchów
-- **Game Tree Search** - eksploracja przestrzeni stanów gry
-
----
-
-## 📁 Project Structure & File Breakdown
+## Project Structure
 
 ```
 ai-checkers/
-├── main.gd                          # Główny kontroler gry
-├── main.tscn                        # Główna scena gry
-├── project.godot                    # Konfiguracja projektu Godot
+├── main.gd                          # Game controller (646 lines)
+├── main.tscn                        # Main scene
+├── project.godot                    # Godot config
 │
 ├── asset/
 │   ├── AI/
-│   │   ├── AIMiniMax.gd            # Implementacja algorytmu Minimax
-│   │   ├── AIAlphaBeta.gd          # Implementacja Alpha-Beta Pruning
-│   │   ├── white.tscn              # Scena białego pionka
-│   │   ├── black.tscn              # Scena czarnego pionka
-│   │   ├── white_king.tscn         # Scena białej damki
-│   │   └── black_king.tscn         # Scena czarnej damki
+│   │   ├── AIMiniMax.gd            # Minimax implementation (379 lines)
+│   │   ├── AIAlphaBeta.gd          # Alpha-Beta pruning (453 lines)
+│   │   ├── white.tscn / black.tscn # Pawn scenes
+│   │   └── white_king.tscn / black_king.tscn # King scenes
 │   │
 │   ├── Board/
-│   │   └── GameState.gd            # Klasa reprezentująca stan gry
+│   │   └── GameState.gd            # Game state for simulation
 │   │
 │   ├── FUNKCJE LOGIKI GRY/
-│   │   ├── PawnMovement.gd         # Logika ruchów pionków
-│   │   ├── AttackMoves.gd          # Logika bić i ataków
-│   │   └── game_over.gd/tscn       # Ekran końca gry
+│   │   ├── PawnMovement.gd         # Move generation (271 lines)
+│   │   ├── AttackMoves.gd          # Capture detection (257 lines)
+│   │   └── game_over.gd/tscn       # Game over screen
 │   │
 │   ├── main_menu/
-│   │   ├── main_menu.gd/tscn       # Menu główne
-│   │   └── select_menu.gd/tscn     # Menu wyboru algorytmu AI
-│   │
-│   ├── Player/
-│   │   └── pawn_move.tscn          # Wizualizacja możliwych ruchów
+│   │   ├── main_menu.gd/tscn       # Main menu
+│   │   └── select_menu.gd/tscn     # Algorithm selection
 │   │
 │   ├── Singleton/
-│   │   └── GlobalVariables.gd      # Zmienne globalne (singleton)
+│   │   └── GlobalVariables.gd      # Global state (singleton pattern)
 │   │
-│   ├── sound/
-│   │   ├── ruch pionka.MP3         # Dźwięk ruchu
-│   │   ├── zbicie.MP3              # Dźwięk bicia
-│   │   └── game_over.MP3           # Dźwięk końca gry
-│   │
-│   └── UI/                          # Elementy interfejsu użytkownika
-│
-└── Eksporty gry:
-    ├── Warcaby.pck                  # Podstawowa wersja
-    ├── Warcaby Głębokością 4.pck    # AI z depth=4
-    └── Warcaby Głębokością 5.pck    # AI z depth=5
+│   └── sound/
+│       ├── ruch pionka.MP3         # Move sound
+│       ├── zbicie.MP3              # Capture sound
+│       └── game_over.MP3           # Game over sound
 ```
 
----
+## AI Implementation
 
-## 🔍 Detailed File Descriptions
+### Minimax (`AIMiniMax.gd`)
 
-### 🎯 Core Game Logic
+Classic recursive game tree search algorithm.
 
-#### `main.gd` (646 linii)
-**Główny kontroler gry - serce całej aplikacji**
-
-**Odpowiedzialności:**
-- Inicjalizacja planszy 8x8 i pionków
-- Obsługa interakcji gracza (kliknięcia myszą)
-- Zarządzanie turami (gracz vs AI)
-- Wizualizacja ruchów i bić
-- Promocja pionków do damek
-- Detekcja końca gry
-
-**Kluczowe zmienne:**
-```gdscript
-var GRIDSIZE: int = 8                    # Rozmiar planszy
-var help_board: Array = []               # Tablica 2D reprezentująca stan planszy
-var isPlayerTurn: bool = true            # Flaga tury gracza
-var isAITurn: bool = false               # Flaga tury AI
-var is_attack: bool = false              # Czy dostępne są bicia
-var possible_move: Array = []            # Możliwe ruchy
-var possible_attack: Array = []          # Możliwe bicia
-```
-
-**Kluczowe funkcje:**
-- `initialize_game_state()` - inicjalizacja gry, ładowanie algorytmów AI
-- `setup_initial_board_state()` - ustawienie początkowej pozycji pionków
-- `promote_to_king()` - promocja pionków do damek
-- `_input(event)` - obsługa kliknięć gracza
-- AI turn handling - wykonywanie ruchów AI
-
----
-
-### 🤖 AI Algorithms
-
-#### `asset/AI/AIMiniMax.gd` (379 linii)
-**Implementacja klasycznego algorytmu Minimax**
-
-**Opis algorytmu:**
-Minimax to algorytm przeszukiwania drzewa gry, który zakłada, że przeciwnik gra optymalnie. Algorytm eksploruje wszystkie możliwe ruchy do określonej głębokości i wybiera ruch maksymalizujący szansę wygranej (lub minimalizujący stratę).
-
-**Kluczowe funkcje:**
+**Core functions:**
 ```gdscript
 func findBestMove(_board, targetDepth, TYPE, _previousTurnWasAttack, _previousPawnAttack)
-```
-- Główna funkcja znajdująca najlepszy ruch dla AI
-- Przeszukuje wszystkie możliwe ruchy dla wszystkich pionków
-- Wywołuje rekurencyjnie `Minimax()` dla każdego możliwego ruchu
+    # Searches all possible moves for all pawns
+    # Calls Minimax() recursively for each move
 
-```gdscript
 func Minimax(game_state, curDepth, targetDepth, isMaximizingPlayer)
-```
-- Rekurencyjna implementacja algorytmu Minimax
-- `isMaximizingPlayer` - true dla AI (maksymalizuje wynik), false dla gracza (minimalizuje)
-- Warunek stopu: osiągnięcie głębokości lub koniec gry
-- Zwraca ocenę pozycji z funkcji `evaluate()`
+    # Recursive minimax with alternating max/min layers
+    # Returns evaluation score from evaluate()
 
-```gdscript
 func evaluate(game_state)
+    # Simple evaluation: pawn = ±1, king = ±10, win = ±10000
 ```
-- Funkcja oceny stanu planszy
-- Przypisuje wartości punktowe:
-  - Zwykły pionek: ±1 punkt
-  - Damka: ±10 punktów
-  - Zwycięstwo: ±10000 punktów
 
-**Szczegóły implementacji:**
-- Obsługa pierwszego ruchu - losowy wybór dla różnorodności gry
-- Symulacja ruchów na kopii planszy (`game_state.board.duplicate(true)`)
-- Obsługa bić wielokrotnych (poprzez `previousTurnWasAttack`)
+**Features:**
+- First move randomization for variety
+- Board state duplication for simulation
+- Multi-jump support via `previousTurnWasAttack`
 
----
+### Alpha-Beta Pruning (`AIAlphaBeta.gd`)
 
-#### `asset/AI/AIAlphaBeta.gd` (453 linie)
-**Zoptymalizowana wersja Minimax z przycinaniem Alpha-Beta**
+Optimized minimax with branch pruning.
 
-**Opis algorytmu:**
-Alpha-Beta Pruning to optymalizacja Minimax, która przyspiesza przeszukiwanie przez eliminację gałęzi drzewa, które na pewno nie wpłyną na ostateczną decyzję. Osiąga to samo rozwiązanie jak Minimax, ale znacznie szybciej.
-
-**Kluczowe funkcje:**
+**Core functions:**
 ```gdscript
 func find_best_move(_board, _targetDepth, TYPE, _previousTurnWasAttack, _previousPawnAttack)
-```
-- Analogiczna do Minimax, ale inicjalizuje parametry alpha i beta
+    # Initializes alpha=-∞, beta=+∞
 
-```gdscript
 func AlphaBeta(game_state, depth, isMax, alpha, beta)
-```
-- Rekurencyjna implementacja z przycinaniem
-- `alpha` - najlepsza wartość dla maksymalizującego gracza
-- `beta` - najlepsza wartość dla minimalizującego gracza
-- Przycina gałęzie gdy `alpha >= beta`
+    # Prunes branches when alpha >= beta
+    # Same result as Minimax, but 10-100× faster
 
-```gdscript
 func evaluate_complicated(game_state)
+    # Advanced evaluation considering:
+    # - Material: pawns (×2), kings (×10)
+    # - Center control: +2 per center position
+    # - King proximity: +2 when close to promotion
+    # - Edge control: +2 for edge positions
+    # - Mobility: points per available move
 ```
-- **Zaawansowana funkcja ewaluacji** uwzględniająca wiele czynników:
-  - **Materiał**: pionki (×2) i damki (×10)
-  - **Kontrola centrum**: +2 punkty za pozycje środkowe
-  - **Bliskość promocji**: +2 punkty gdy blisko końca planszy
-  - **Kontrola krawędzi**: +2 punkty za pozycje na bokach
-  - **Mobilność**: punkty za liczbę dostępnych ruchów
 
-**Przykład obliczeń:**
+**Formula:**
 ```gdscript
 score = (sum_piece * 2 + (3 * sum_kings)) * 10 
         + sum_central_control * 2 
@@ -247,424 +109,114 @@ score = (sum_piece * 2 + (3 * sum_kings)) * 10
         + sum_mobility_pawns / 4
 ```
 
-**Zalety Alpha-Beta vs Minimax:**
-- ⚡ Średnio 10-100× szybsze przeszukiwanie
-- 📊 Pozwala na większą głębokość przy tym samym czasie
-- 🎯 Identyczne wyniki końcowe jak Minimax
-- 🔧 Lepsza skalowalność
+**Performance:**
+- Minimax depth 5: ~2-5 seconds
+- Alpha-Beta depth 7: ~0.5-1 second
+- Time complexity: O(b^d) → O(b^(d/2)) best case
 
----
+### Game Logic
 
-### 🎲 Game Logic
-
-#### `asset/FUNKCJE LOGIKI GRY/PawnMovement.gd` (271 linii)
-**Moduł odpowiedzialny za generowanie legalnych ruchów**
-
-**Kluczowe funkcje:**
-
+**Move Generation (`PawnMovement.gd`):**
 ```gdscript
 func all_possible_move_types_pawn(_TYPE_PAWN: String, _board: Array) -> Dictionary
-```
-- Generuje wszystkie możliwe ruchy dla wszystkich pionków danego koloru
-- Zwraca słownik: `{pawn_reference: [array_of_moves]}`
-- Rozróżnia zwykłe pionki i damki
+    # Returns {pawn_reference: [array_of_moves]}
 
-```gdscript
-func posibble_move_pawn(pawn, _board: Array) -> Array
-```
-- Generuje możliwe ruchy dla pojedynczego zwykłego pionka
-- Uwzględnia kierunek (białe w górę, czarne w dół)
-- Obsługuje:
-  - Zwykłe ruchy po przekątnej
-  - Bicia w przód
-  - Bicia do tyłu (według zasad warcabów)
+func possible_move_pawn(pawn, _board: Array) -> Array
+    # Standard diagonal moves, forward/backward captures
 
-```gdscript
 func possible_move_pawn_king(pawn, _board: Array) -> Array
+    # Kings move in all 4 diagonal directions
 ```
-- Generuje możliwe ruchy dla damki
-- Damka może poruszać się we wszystkich 4 kierunkach po przekątnej
-- Obsługuje bicia wielopolowe
 
-```gdscript
-func possible_diagonal_move(_row: int, _col: int, _board: Array) -> bool
-func possible_diagonal_jump(_row: int, _col: int, directionRow: int, directionCol: int, _board: Array) -> bool
-```
-- Funkcje pomocnicze sprawdzające legalność ruchów
-- Walidacja granic planszy
-- Sprawdzanie kolizji z innymi pionkami
-
----
-
-#### `asset/FUNKCJE LOGIKI GRY/AttackMoves.gd` (257 linii)
-**Moduł zarządzania biciami i atakami**
-
-**Odpowiedzialności:**
-- Detekcja dostępności bić dla gracza/AI
-- Implementacja zasady obowiązkowego bicia
-- Sprawdzanie możliwości bić wielokrotnych
-
-**Kluczowe funkcje:**
-
+**Capture Detection (`AttackMoves.gd`):**
 ```gdscript
 func is_attack_move_available_for_type(_TYPE_PAWN: String, _board: Array)
+    # Sets GlobalVariables.is_attack flag
+
+func check_attack_move(row, col, directionRow, directionCol, pionek, _board)
+    # Low-level capture validation
 ```
-- Sprawdza czy dla danego koloru dostępne są jakiekolwiek bicia
-- Ustawia globalną flagę `GlobalVariables.is_attack = true/false`
-- Sprawdza zarówno zwykłe pionki jak i damki
 
-```gdscript
-func is_attack_move_available_pawn(PAWN, _board: Array) -> bool
-```
-- Sprawdza czy konkretny pionek ma dostępne bicia
-- Używane dla bić wielokrotnych (ten sam pionek bije kolejny raz)
-
-```gdscript
-func check_attack_move(row: int, col: int, directionRow: int, directionCol: int, pionek: String, _board: Array) -> bool
-```
-- Niskopoziomowa funkcja sprawdzająca możliwość bicia
-- Waliduje:
-  - Czy pole jest w granicach planszy
-  - Czy na polu jest pionek przeciwnika
-  - Czy pole docelowe (za przeciwnikiem) jest puste
-
----
-
-#### `asset/Board/GameState.gd` (19 linii)
-**Klasa reprezentująca stan gry**
-
+**State Management (`GameState.gd`):**
 ```gdscript
 class_name GameState
-
-var board: Array                              # Tablica 2D z referencjami do pionków
-var previousTurnWasAttackGameState: bool      # Czy poprzedni ruch był biciem
-var previousPawnAttackGameState: String       # Referencja do pionka, który bił
-var curretDepth: int                          # Aktualna głębokość w drzewie przeszukiwania
-var nonCaptureMoveCount: int                  # Licznik ruchów bez bicia (dla remisu)
-var created_king: bool                        # Czy w tym ruchu powstała damka
-var currect_turn_attack: bool                 # Czy aktualny ruch to bicie
-var is_game_over: bool                        # Czy gra się zakończyła
+    var board: Array
+    var previousTurnWasAttackGameState: bool
+    var previousPawnAttackGameState: String
+    var curretDepth: int
+    var nonCaptureMoveCount: int
+    var created_king: bool
 ```
 
-**Zastosowanie:**
-- Używana w algorytmach AI do symulacji ruchów
-- Umożliwia "cofanie" ruchów bez modyfikacji prawdziwej planszy
-- Każda symulacja tworzy nową instancję z `board.duplicate(true)`
-- Przekazywana rekurencyjnie w drzewie przeszukiwania
+Used for board state simulation in AI algorithms without modifying real board.
 
----
+## Installation
 
-### 🎨 UI & Menu System
+**Requirements:**
+- Godot Engine 4.1+
+- 2GB RAM minimum
 
-#### `asset/main_menu/main_menu.gd` (18 linii)
-**Menu główne gry**
+**Option 1: From source**
+```bash
+git clone https://github.com/malelolPK/ai-checkers.git
+cd ai-checkers
+godot --path . --editor  # Press F5 to run
+```
 
+**Option 2: Import to Godot**
+1. Open Godot Engine
+2. Click "Import" → select `project.godot`
+3. Press F5
+
+**Configure AI search depth** in `main.gd`:
 ```gdscript
-func on_start_pressed() -> void:
-    get_tree().change_scene_to_packed(start_level)
-
-func on_exit_pressed() -> void:
-    get_tree().quit()
-```
-
-#### `asset/main_menu/select_menu.gd` (22 linie)
-**Menu wyboru algorytmu AI**
-
-```gdscript
-func minimax_pressed() -> void:
-    get_tree().set_meta("algorithm_choice", 1)      # Wybór Minimax
-    get_tree().change_scene_to_packed(start_level)
-
-func alpha_beta_pressed() -> void:
-    get_tree().set_meta("algorithm_choice", 2)      # Wybór Alpha-Beta
-    get_tree().change_scene_to_packed(start_level)
-```
-
-**Przepływ aplikacji:**
-1. Start → Main Menu
-2. Wybór algorytmu → Select Menu
-3. Ustawienie metadanych w drzewie scen
-4. Załadowanie głównej sceny gry z wybranym algorytmem
-
----
-
-### 🔧 Utilities
-
-#### `asset/Singleton/GlobalVariables.gd` (12 linii)
-**Singleton przechowujący zmienne globalne**
-
-```gdscript
-var board: Array = []              # Referencja do głównej planszy
-var is_attack: bool = false        # Globalna flaga dostępności bić
-var previousPawn: String = ""      # Pionek z poprzedniej tury (dla bić wielokrotnych)
-```
-
-**Zastosowanie Singleton Pattern:**
-- Dostęp z każdego skryptu: `GlobalVariables.is_attack`
-- Zarejestrowany w `project.godot` jako autoload
-- Upraszcza komunikację między modułami
-
----
-
-
-### Przepływ danych w turze AI
-
-```
-1. MAIN (isAITurn = true)
-   │
-   ├─→ Wybór algorytmu (Minimax / Alpha-Beta)
-   │
-2. AI Algorithm::findBestMove()
-   │
-   ├─→ PawnMovement.all_possible_move_types_pawn()
-   │   └─→ Generuje wszystkie możliwe ruchy
-   │
-   ├─→ Dla każdego ruchu:
-   │   ├─→ Tworzy GameState (symulacja)
-   │   ├─→ ai_make_move() (wykonuje ruch w symulacji)
-   │   ├─→ Wywołuje Minimax/AlphaBeta (rekurencyjnie)
-   │   │   ├─→ evaluate() / evaluate_complicated()
-   │   │   └─→ Zwraca score
-   │   └─→ Porównuje scores i wybiera najlepszy
-   │
-3. Zwraca [pawn, move]
-   │
-4. MAIN wykonuje ruch na prawdziwej planszy
-   │
-5. Zmiana tury → isPlayerTurn = true
-```
-
-### Pattern Design użyte w projekcie
-
-1. **Singleton Pattern** - `GlobalVariables.gd`
-   - Jeden globalny dostęp do stanu gry
-
-2. **Strategy Pattern** - Wymienne algorytmy AI
-   - `AIMiniMax.gd` i `AIAlphaBeta.gd` implementują tę samą funkcjonalność
-   - Wybór algorytmu w runtime
-
-3. **State Pattern** - Zarządzanie turami
-   - `isPlayerTurn` / `isAITurn` przełączają stan gry
-
-4. **Module Pattern** - Separacja logiki
-   - `PawnMovement`, `AttackMoves` jako niezależne moduły
-
----
-
-## 🚀 Installation & Setup
-
-### Wymagania systemowe
-
-```
-✓ Godot Engine 4.1 lub nowszy
-✓ System: Windows / Linux / macOS
-✓ Pamięć RAM: minimum 2GB
-✓ Miejsce na dysku: ~100MB
-```
-
-### Instalacja - Sposób 1: Uruchomienie z kodem źródłowym
-
-1. **Zainstaluj Godot Engine 4.1**
-   ```bash
-   # Linux (przykład dla Ubuntu)
-   wget https://downloads.tuxfamily.org/godotengine/4.1/Godot_v4.1-stable_linux.x86_64.zip
-   unzip Godot_v4.1-stable_linux.x86_64.zip
-   
-   # Lub pobierz ze strony: https://godotengine.org/download
-   ```
-
-2. **Sklonuj repozytorium**
-   ```bash
-   git clone https://github.com/malelolPK/ai-checkers.git
-   cd ai-checkers
-   ```
-
-3. **Otwórz projekt w Godot**
-   ```bash
-   godot --path . --editor
-   ```
-   
-   Lub:
-   - Uruchom Godot Engine
-   - Kliknij "Import"
-   - Wybierz plik `project.godot`
-
-4. **Uruchom grę**
-   - Wciśnij `F5` w edytorze Godot
-   - Lub kliknij przycisk "Play" (▶)
-
-### Instalacja - Sposób 2: Uruchomienie z plików .pck (eksporty)
-
-1. **Pobierz Godot runtime**
-   ```bash
-   # Pobierz wersję bez edytora (mniejsza)
-   wget https://downloads.tuxfamily.org/godotengine/4.1/Godot_v4.1-stable_linux.x86_64.zip
-   ```
-
-2. **Uruchom grę**
-   ```bash
-   # Podstawowa wersja
-   godot --main-pack Warcaby.pck
-   
-   # Lub z określoną głębokością AI
-   godot --main-pack "Warcaby Głębokością 4.pck"
-   godot --main-pack "Warcaby Głębokością 5.pck"
-   ```
-
-### Konfiguracja głębokości przeszukiwania AI
-
-W pliku `main.gd` znajdź linię wywołującą algorytm AI i zmień parametr `targetDepth`:
-
-```gdscript
-# Dla Minimax
+# Minimax (4-5 recommended)
 var best_move = ai_script_mini_max.findBestMove(
     GlobalVariables.board, 
-    5,  # ← Zmień tę wartość (1-7 rekomendowane)
+    5,  # depth: 3=fast/weak, 5=balanced, 7=slow/strong
     "black", 
     previousTurnWasAttack, 
     previousPawnAttack
 )
 
-# Dla Alpha-Beta (może handle większe wartości)
+# Alpha-Beta (6-8 recommended)
 var best_move = ai_script_alpha_beta.find_best_move(
     GlobalVariables.board, 
-    7,  # ← Alpha-Beta radzi sobie z głębokością 6-8
+    7,  # Alpha-Beta handles 6-8 efficiently
     "black", 
     previousTurnWasAttack, 
     previousPawnAttack
 )
 ```
 
-**Wpływ głębokości:**
-- `depth = 3` → AI patrzy 3 ruchy do przodu (szybkie, słabe)
-- `depth = 5` → AI patrzy 5 ruchów do przodu (zbalansowane)
-- `depth = 7` → AI patrzy 7 ruchów do przodu (wolne, silne)
+## How to Play
 
----
+**Rules:**
+- Standard checkers rules (diagonal moves, forced captures, kings)
+- Left-click to select pawn and make move
+- Possible moves highlighted automatically
+- Win by capturing all opponent pieces or blocking their moves
 
-## 🎮 How to Play
+**Gameplay:**
 
-### Zasady gry
+![Player move](./asset/screenshots/gameplay_player.gif)
+![AI response](./asset/screenshots/gameplay_ai.gif)
 
-1. **Cel gry**: Zbij wszystkie pionki przeciwnika lub zablokuj je, by nie mogły się ruszyć
+## Algorithm Comparison
 
-2. **Ruchy podstawowe**:
-   - Pionki poruszają się po przekątnej o jedno pole
-   - Białe pionki idą w górę, czarne w dół
+| Metric | Minimax | Alpha-Beta |
+|--------|---------|------------|
+| Time complexity | O(b^d) | O(b^(d/2)) best case |
+| Practical depth | 4-5 | 6-8 |
+| Time (depth 5) | ~2-5 sec | ~0.5-1 sec |
+| Speedup | 1× | 10-100× |
 
-3. **Bicia**:
-   - Bicie odbywa się przez przeskoczenie pionka przeciwnika
-   - Bicie jest obowiązkowe (gra automatycznie wykrywa)
-   - Możliwe są bicia wielokrotne w jednej turze
+*b = branching factor (~7 moves avg), d = search depth*
 
-4. **Damki (Kings)**:
-   - Pionek staje się damką po dotarciu na koniec planszy
-   - Damka może poruszać się we wszystkich kierunkach po przekątnej
-   - Damka może przeskakiwać wiele pól
+## License
 
-### Sterowanie
-
-- **Lewy przycisk myszy** - wybór pionka i wykonanie ruchu
-- Możliwe ruchy są automatycznie podświetlane
-- Gra informuje o dostępnych biciach
-
-### Przebieg rozgrywki
-
-**Ruch gracza - wybór pionka i wykonanie ruchu:**
-
-![Rozgrywka - ruch gracza z podświetlonymi możliwościami](./asset/screenshots/gameplay_player.gif)
-
-**Odpowiedź AI - algorytm oblicza i wykonuje optymalny ruch:**
-
-![Rozgrywka - ruch AI](./asset/screenshots/gameplay_ai.gif)
-
----
-
-
-
-
-## 🔬 Algorithm Comparison
-
-| Aspekt | Minimax | Alpha-Beta Pruning |
-|--------|---------|-------------------|
-| **Złożoność czasowa** | O(b^d) | O(b^(d/2)) w najlepszym przypadku |
-| **Pamięć** | Liniowa względem d | Liniowa względem d |
-| **Optymalizacja** | Brak | Przycina drzewo |
-| **Głębokość (praktyczna)** | 4-5 poziomów | 6-8 poziomów |
-| **Czas obliczeń (d=5)** | ~2-5 sekund | ~0.5-1 sekunda |
-
-*gdzie: b = branching factor (średnio ~7 ruchów), d = depth (głębokość)*
-
-### Przykład przeszukiwania
-
-**Drzewo dla pojedynczego ruchu (uproszczone):**
-
-```
-                      [Pozycja początkowa]
-                              │
-        ┌────────────┬────────┼────────┬────────────┐
-        ▼            ▼        ▼        ▼            ▼
-     [Ruch A]    [Ruch B] [Ruch C] [Ruch D]    [Ruch E]
-        │            │        │        │            │
-    ┌───┼───┐    ┌──┼──┐  ┌──┼──┐  ┌──┼──┐     ┌──┼──┐
-    ▼   ▼   ▼    ▼  ▼  ▼  ▼  ▼  ▼  ▼  ▼  ▼     ▼  ▼  ▼
-   ...Depth 2...
-
-   🔴 Minimax: Sprawdza WSZYSTKIE gałęzie
-   🟢 Alpha-Beta: Przycina nieperspektywiczne gałęzie
-```
-
-### Obszary gdzie potrzebna pomoc:
-
-- 🐛 Znajdowanie i naprawianie bugów
-- 🎨 Projektowanie UI/UX
-- 🧠 Optymalizacja algorytmów AI
-
----
-
-## 📄 License
-
-Ten projekt jest dostępny na licencji **MIT License**.
-
-```
 MIT License
 
-Copyright (c) 2024 [Twoje Imię/Nick]
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
-
-## 👤 Author
+## Author
 
 **GitHub**: [@malelolPK](https://github.com/malelolPK)
-
-
-## 📊 Project Stats
-
-```
-Linie kodu:      ~2,500+
-Języki:          GDScript (100%)
-Pliki:           50+
-```
-
----
-
-
-*README ostatnio zaktualizowane: 5 grudnia 2024*
