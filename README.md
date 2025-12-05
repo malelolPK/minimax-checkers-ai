@@ -611,11 +611,11 @@ var best_move = ai_script_alpha_beta.find_best_move(
 
 **Ruch gracza - wybór pionka i wykonanie ruchu:**
 
-![Rozgrywka - ruch gracza z podświetlonymi możliwościami](./asset/gameplay_player.gif)
+![Rozgrywka - ruch gracza z podświetlonymi możliwościami](./asset/screenshots/gameplay_player.gif)
 
 **Odpowiedź AI - algorytm oblicza i wykonuje optymalny ruch:**
 
-![Rozgrywka - ruch AI](./asset/gameplay_ai.gif)
+![Rozgrywka - ruch AI](./asset/screenshots/gameplay_ai.gif)
 
 ---
 
