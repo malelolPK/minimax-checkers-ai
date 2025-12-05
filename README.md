@@ -1,11 +1,6 @@
 # 🎮 AI Checkers Game - Warcaby z algorytmami Minimax i Alpha-Beta
 
 > Zaawansowana implementacja gry w warcaby (checkers) z wykorzystaniem algorytmów sztucznej inteligencji w silniku Godot Engine 4.1
-
-[![Godot Engine](https://img.shields.io/badge/Godot-4.1-blue.svg)](https://godotengine.org/)
-[![GDScript](https://img.shields.io/badge/GDScript-100%25-green.svg)](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/index.html)
-[![License](https://img.shields.io/badge/license-MIT-orange.svg)](LICENSE)
-
 ---
 
 ## 📋 Executive Summary
@@ -411,40 +406,6 @@ var previousPawn: String = ""      # Pionek z poprzedniej tury (dla bić wielokr
 
 ---
 
-## 🏛️ Architecture Overview
-
-### Architektura wysokiego poziomu
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                        MAIN GAME LOOP                       │
-│                        (main.gd)                            │
-└────────────────────────┬────────────────────────────────────┘
-                         │
-          ┌──────────────┼──────────────┐
-          │              │              │
-          ▼              ▼              ▼
-    ┌─────────┐    ┌─────────┐   ┌──────────┐
-    │  PLAYER │    │   AI    │   │   BOARD  │
-    │  INPUT  │    │ ENGINE  │   │  STATE   │
-    └─────────┘    └─────────┘   └──────────┘
-          │              │              │
-          │        ┌─────┴─────┐        │
-          │        │           │        │
-          ▼        ▼           ▼        ▼
-    ┌─────────────────────────────────────┐
-    │         GAME LOGIC LAYER            │
-    │  - PawnMovement                     │
-    │  - AttackMoves                      │
-    │  - GameState                        │
-    └─────────────────────────────────────┘
-                     │
-                     ▼
-          ┌──────────────────────┐
-          │  GLOBAL VARIABLES    │
-          │    (Singleton)       │
-          └──────────────────────┘
-```
 
 ### Przepływ danych w turze AI
 
@@ -619,94 +580,8 @@ var best_move = ai_script_alpha_beta.find_best_move(
 
 ---
 
-## 📸 Screenshots & Assets Instructions
 
-### 📁 Gdzie stworzyć folder assets
 
-Utwórz folder w głównym katalogu projektu:
-
-```bash
-cd ai-checkers
-mkdir -p assets
-```
-
-### 🎥 GIF-y do nagrania - WYMAGANE
-
-Musisz nagrać **2 GIF-y** pokazujące rozgrywkę:
-
-#### 1. **`gameplay_player.gif`** - Ruch gracza
-**Co pokazać:**
-- Kliknięcie w pionek gracza (biały)
-- Podświetlenie możliwych ruchów
-- Wykonanie ruchu
-
-**Jak nagrać:**
-1. Uruchom grę i rozpocznij rozgrywkę
-2. Rozpocznij nagrywanie ekranu (tylko obszar planszy + panel info)
-3. Kliknij na swojego pionka (białego)
-4. Poczekaj chwilę żeby widać było podświetlone ruchy
-5. Wykonaj ruch
-6. Zatrzymaj nagranie
-7. Zapisz jako `assets/gameplay_player.gif`
-
-**Parametry:**
-- Długość: 3-5 sekund
-- Rozmiar: max 5MB
-- FPS: 15-20 (wystarczy)
-
-#### 2. **`gameplay_ai.gif`** - Ruch AI
-**Co pokazać:**
-- Tura AI (komputer myśli)
-- Wykonanie ruchu przez AI (czarny pionek)
-- Zmiana tury z powrotem na gracza
-
-**Jak nagrać:**
-1. Po swoim ruchu czekaj na ruch AI
-2. Rozpocznij nagrywanie PRZED ruchem AI
-3. Nagraj jak AI wykonuje ruch
-4. Zatrzymaj nagranie gdy tura wróci do gracza
-5. Zapisz jako `assets/gameplay_ai.gif`
-
-**Parametry:**
-- Długość: 2-4 sekundy
-- Rozmiar: max 5MB
-- FPS: 15-20
-
-### 🛠️ Narzędzia do nagrywania (Linux)
-
-```bash
-# Peek - najlepsze do GIF-ów (REKOMENDOWANE)
-sudo apt install peek
-
-# SimpleScreenRecorder (nagrywa MP4, potem konwertuj na GIF)
-sudo apt install simplescreenrecorder
-
-# Konwersja MP4 → GIF (jeśli używasz SimpleScreenRecorder)
-ffmpeg -i input.mp4 -vf "fps=15,scale=800:-1:flags=lanczos" -c:v gif output.gif
-```
-
-### 📐 Format GIF-ów w README
-
-Już dodane w odpowiednich sekcjach:
-
-```markdown
-![Rozgrywka - ruch gracza](./assets/gameplay_player.gif)
-![Rozgrywka - ruch AI](./assets/gameplay_ai.gif)
-```
-
-### 📂 Struktura po dodaniu GIF-ów:
-
-```
-ai-checkers/
-├── README.md
-├── assets/
-│   ├── gameplay_player.gif  ← WYMAGANE
-│   └── gameplay_ai.gif      ← WYMAGANE
-├── asset/ (folder z kodem)
-└── ...
-```
-
----
 
 ## 🔬 Algorithm Comparison
 
@@ -717,7 +592,6 @@ ai-checkers/
 | **Optymalizacja** | Brak | Przycina drzewo |
 | **Głębokość (praktyczna)** | 4-5 poziomów | 6-8 poziomów |
 | **Czas obliczeń (d=5)** | ~2-5 sekund | ~0.5-1 sekunda |
-| **Jakość ruchów** | Identyczna | Identyczna |
 
 *gdzie: b = branching factor (średnio ~7 ruchów), d = depth (głębokość)*
 
@@ -737,84 +611,14 @@ ai-checkers/
    ...Depth 2...
 
    🔴 Minimax: Sprawdza WSZYSTKIE gałęzie
-   🟢 Alpha-Beta: Przycina nieperspektywiczne gałęzie (zaznaczone X)
+   🟢 Alpha-Beta: Przycina nieperspektywiczne gałęzie
 ```
-
----
-
-## 🎓 Learning Resources
-
-Jeśli chcesz zrozumieć algorytmy użyte w projekcie:
-
-### Minimax Algorithm
-- 📹 [Minimax Algorithm in Game Theory](https://www.youtube.com/watch?v=l-hh51ncgDI)
-- 📚 [Minimax - Wikipedia](https://en.wikipedia.org/wiki/Minimax)
-
-### Alpha-Beta Pruning
-- 📹 [Alpha-Beta Pruning - MIT OpenCourseWare](https://www.youtube.com/watch?v=xBXHtz4Gbdo)
-- 📚 [Alpha-Beta Pruning - Wikipedia](https://en.wikipedia.org/wiki/Alpha%E2%80%93beta_pruning)
-
-### Godot Engine
-- 📖 [Godot Official Documentation](https://docs.godotengine.org/en/stable/)
-- 📹 [GDScript Tutorial](https://www.youtube.com/watch?v=KjX5llYZ5eQ)
-
-### Game AI
-- 📚 Książka: "Artificial Intelligence: A Modern Approach" - Russell & Norvig
-- 📚 Książka: "Programming Game AI by Example" - Mat Buckland
-
----
-
-## 🚧 Future Improvements
-
-### Planowane funkcje
-
-- [ ] **Multiplayer online** - gra przez sieć
-- [ ] **Tryb PvP lokalny** - dwóch graczy na jednym komputerze
-- [ ] **System trudności** - Easy/Medium/Hard (depth 3/5/7)
-- [ ] **Historia ruchów** - cofanie i powtarzanie ruchów
-- [ ] **Różne warianty warcabów**:
-  - [ ] Warcaby polskie (aktualna wersja)
-  - [ ] Warcaby angielskie
-  - [ ] Warcaby brazylijskie
-  - [ ] Damka 100-polowa
-
-### Optymalizacje techniczne
-
-- [ ] **Memoizacja w AI** - cache już obliczonych pozycji (transposition table)
-- [ ] **Iterative Deepening** - progresywne zwiększanie głębokości
-- [ ] **Move Ordering** - sortowanie ruchów dla lepszego pruningu
-- [ ] **Parallel Search** - wykorzystanie wielu wątków CPU
-- [ ] **Neural Network AI** - wykorzystanie uczenia maszynowego
-- [ ] **Opening Book** - baza danych otwarć
-
-### UI/UX Improvements
-
-- [ ] **Animacje smooth** - płynniejsze przejścia pionków
-- [ ] **Motyw ciemny/jasny**
-- [ ] **Różne style plansz** - drewniana, marmurowa, etc.
-- [ ] **Statystyki** - liczba wygranych, współczynnik zbić, etc.
-- [ ] **Tutorial interaktywny** - nauka zasad w grze
-- [ ] **Replay system** - odtwarzanie partii
-
----
-
-## 🤝 Contributing
-
-Projekt jest otwarty na kontrybucje! Jeśli chcesz pomóc:
-
-1. **Fork** repozytorium
-2. Stwórz branch dla nowej funkcji: `git checkout -b feature/AmazingFeature`
-3. Commit zmian: `git commit -m 'Add some AmazingFeature'`
-4. Push do brancha: `git push origin feature/AmazingFeature`
-5. Otwórz **Pull Request**
 
 ### Obszary gdzie potrzebna pomoc:
 
 - 🐛 Znajdowanie i naprawianie bugów
 - 🎨 Projektowanie UI/UX
 - 🧠 Optymalizacja algorytmów AI
-- 📝 Dokumentacja i tutoriale
-- 🌍 Tłumaczenia (obecnie tylko polski)
 
 ---
 
@@ -846,34 +650,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-**Co to oznacza:**
-- ✅ Wolność użycia komercyjnego
-- ✅ Modyfikacja i dystrybucja
-- ✅ Użycie prywatne
-- ❗ Brak gwarancji
-- ❗ Autor nie ponosi odpowiedzialności
-
----
 
 ## 👤 Author
 
 **GitHub**: [@malelolPK](https://github.com/malelolPK)
 
-### Kontakt
-- 📧 Email: [twój-email@example.com]
-- 💼 LinkedIn: [Twój profil LinkedIn]
-- 🌐 Portfolio: [twoja-strona.com]
-
----
-
-## 🙏 Acknowledgments
-
-- **Godot Engine** - za fantastyczny open-source game engine
-- **Społeczność Godot** - za wsparcie i tutoriale
-- **Claude Shannon** - pionier teorii gier komputerowych
-- **John von Neumann** - twórca teorii gier
-
----
 
 ## 📊 Project Stats
 
@@ -881,42 +662,9 @@ SOFTWARE.
 Linie kodu:      ~2,500+
 Języki:          GDScript (100%)
 Pliki:           50+
-Commity:         [zaktualizuj po pierwszym commicie]
-Czas rozwoju:    [podaj czas]
-Wersja:          1.0.0
 ```
 
 ---
 
-## 🔗 Related Projects
-
-Jeśli podobał Ci się ten projekt, sprawdź również:
-
-- [Face Expression Recognition VIT](../Face_Expression_recognition_VIT/) - rozpoznawanie emocji z twarzy
-- [Fully Connected Layers and CNN From Scratch](../FullyConnectedLayersAndCNNFromScratch/) - implementacja sieci neuronowych od podstaw
-
----
-
-<div align="center">
-
-### ⭐ Jeśli projekt Ci się podoba, zostaw gwiazdkę na GitHubie! ⭐
-
-**Made with ❤️ and ☕ by [Twoje Imię]**
-
-</div>
-
----
-
-## 📝 Changelog
-
-### Version 1.0.0 (2024-12-05)
-- ✨ Pierwsza pełna wersja gry
-- 🤖 Implementacja Minimax i Alpha-Beta
-- 🎮 Pełna mechanika warcabów
-- 🎨 System menu i UI
-- 🔊 Efekty dźwiękowe
-- 📦 Eksport do .pck files
-
----
 
 *README ostatnio zaktualizowane: 5 grudnia 2024*
