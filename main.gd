@@ -87,6 +87,17 @@ func initialize_game_state():
 
 func new_game_board():
 	stard_board = [
+	[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, -1, 0, -1, 0, -1, 0, 0],
+		[0, 0, -1, 0, -1, 0, 0, 0],
+		[0, 1, 0, 1, 0, 0, 0, 0],
+		[1, 0, 1, 0, 2, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+	]
+	
+	var stard_board2 = [
 		[0,-1,0,-1,0,-1,0,-1],
 		[-1,0,-1,0,-1,0,-1,0],
 		[0,-1,0,-1,0,-1,0,-1],
@@ -96,6 +107,17 @@ func new_game_board():
 		[0,1,0,1,0,1,0,1],
 		[1,0,1,0,1,0,1,0],
 	]
+	
+	var demo_board = [
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, -1, 0, -1, 0, -1, 0, 0],
+		[0, 0, -1, 0, -1, 0, 0, 0],
+		[0, 1, 0, 1, 0, 0, 0, 0],
+		[1, 0, 1, 0, 1, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+		[0, 0, 0, 0, 0, 0, 0, 0],
+]
 
 func create_empty_board():
 	for i in range(8):
@@ -349,7 +371,7 @@ func player_game_ai():
 func ai_move():
 	if isAITurn:
 		var bestMoveAI
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(6).timeout
 		possible_move = []
 		AttackMoves.is_attack_move_available_for_type("black",GlobalVariables.board)
 		if previousTurnWasAttack and GlobalVariables.is_attack and previousTurn == "AI":
